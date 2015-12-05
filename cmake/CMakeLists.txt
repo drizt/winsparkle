@@ -35,6 +35,8 @@ set(INCLUDE_INSTALL_DIR "include")
 set(CONFIG_INSTALL_DIR "${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}")
 set(CMAKE_DEBUG_POSTFIX "d")
 
+option(BUILD_SHARED_LIBS "Build shared library" ON)
+
 set(EXPAT_INCLUDE_DIRS "${ROOT_DIR}/3rdparty/expat/lib")
 
 # bundled expat
@@ -85,15 +87,22 @@ foreach(RESOURCE ${RESOURCES})
                              -o ${CMAKE_CURRENT_BINARY_DIR}/${RESOURCE}.o)
 endforeach()
 
-add_library(${PROJECT_NAME} SHARED ${SOURCES} $<TARGET_OBJECTS:wxWidgets> $<TARGET_OBJECTS:expat>)
+add_library(${PROJECT_NAME} ${SOURCES} $<TARGET_OBJECTS:wxWidgets> $<TARGET_OBJECTS:expat>)
+
+if (NOT BUILD_SHARED_LIBS)
+  target_compile_definitions(${PROJECT_NAME} PUBLIC WIN_SPARKLE_STATIC)
+endif()
 
 target_link_libraries(${PROJECT_NAME} wininet version rpcrt4 comctl32)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
                       VERSION ${LIB_MAJOR_VERSION}.${LIB_MINOR_VERSION}.${LIB_PATCH_VERSION}
                       PUBLIC_HEADER "${PUBLIC_HEADERS}"
-                      SOVERSION ${LIB_MAJOR_VERSION}
-                      PREFIX "")
+                      SOVERSION ${LIB_MAJOR_VERSION})
+
+if(BUILD_SHARED_LIBS)
+  set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
+endif()
 
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}-export
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
