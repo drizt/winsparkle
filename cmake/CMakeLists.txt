@@ -35,7 +35,7 @@ set(INCLUDE_INSTALL_DIR "include")
 set(CONFIG_INSTALL_DIR "${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}")
 set(CMAKE_DEBUG_POSTFIX "d")
 
-set(EXPAT_INCLUDE_DIRS "${ROOT_DIR}/3rdparty/expat/lib")
+set(EXPAT_INCLUDE_DIRS "${ROOT_DIR}/3rdparty/expat/expat/lib")
 
 # bundled expat
 add_subdirectory(expat)
