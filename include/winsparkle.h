@@ -452,6 +452,26 @@ WIN_SPARKLE_API void __cdecl win_sparkle_check_update_with_ui_and_install();
 */
 WIN_SPARKLE_API void __cdecl win_sparkle_check_update_without_ui();
 
+/**
+    Checks if an update is available.
+
+    No progress UI is shown to the user when checking. If an update is
+    available, the usual "update available" window is shown; this function
+    is *not* completely UI-less.
+
+    Use with caution, it usually makes more sense to use the automatic update
+    checks on interval option or manual check with visible UI.
+
+    This function returns immediately.
+
+    @note This function respects "Skip this version" choice by the user.
+
+    @since 0.5
+
+    @see win_sparkle_check_update_with_ui_and_install()
+*/
+WIN_SPARKLE_API void __cdecl win_sparkle_check_update_without_ui_and_install();
+
 //@}
 
 #ifdef __cplusplus

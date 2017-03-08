@@ -258,7 +258,7 @@ void UpdateChecker::Run()
             return;
         }
 
-        UI::NotifyUpdateAvailable(appcast, ShouldAutomaticallyInstall());
+        UI::NotifyUpdateAvailable(appcast, ShouldAutomaticallyDownload(), ShouldAutomaticallyInstall());
     }
     catch ( ... )
     {

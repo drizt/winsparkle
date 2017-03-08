@@ -66,6 +66,9 @@ protected:
     /// Should give version be ignored?
     virtual bool ShouldSkipUpdate(const Appcast& appcast) const;
 
+    /// Should we download the update or prompt the user for options first?
+    virtual bool ShouldAutomaticallyDownload() const { return false; }
+
     /// Should we install the update or prompt the user for options first?
     virtual bool ShouldAutomaticallyInstall() const { return false; }
 
@@ -74,6 +77,18 @@ protected:
     virtual bool IsJoinable() const { return false; }
 };
 
+/**
+    Update checker used to automatically install updates when found.
+ */
+class AutoInstallUpdateChecker : public UpdateChecker
+{
+public:
+    /// Creates checker thread.
+    AutoInstallUpdateChecker() : UpdateChecker() {}
+
+protected:
+    virtual bool ShouldAutomaticallyInstall() const { return true; };
+};
 
 /**
     Update checker used for manual checking.
@@ -101,6 +116,7 @@ public:
 
 protected:
     virtual bool ShouldAutomaticallyInstall() const { return true; };
+    virtual bool ShouldAutomaticallyDownload() const { return true; };
 };
 
 
