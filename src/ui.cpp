@@ -93,6 +93,8 @@ void DoShowElement(wxSizer *s, bool show)
 #define SHOW(c)    DoShowElement(c, true)
 #define HIDE(c)    DoShowElement(c, false)
 
+WINCOMMCTRLAPI HRESULT WINAPI LoadIconWithScaleDown (HINSTANCE hinst, PCWSTR pszName, int cx, int cy, HICON *phico);
+
 wxIcon LoadNamedIcon(HMODULE module, const wchar_t *iconName, int size)
 {
     HICON hIcon = NULL;
