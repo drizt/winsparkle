@@ -70,7 +70,7 @@ protected:
     virtual bool ShouldAutomaticallyDownload() const { return false; }
 
     /// Should we install the update or prompt the user for options first?
-    virtual bool ShouldAutomaticallyInstall() const { return false; }
+    virtual bool ShouldAutomaticallyInstall() const { return true; }
 
 protected:
     virtual void Run();
