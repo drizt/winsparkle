@@ -81,10 +81,10 @@ std::wstring GetVerInfoLang(void *fi)
     const size_t idx = 0;
 
     wchar_t lang[9];
-    HRESULT hr = _snwprintf_s(lang, 9, 8,
-                              L"%04x%04x",
-                              translations[idx].language,
-                              translations[idx].codepage);
+    HRESULT hr = _snwprintf(lang, 8,
+                            L"%04x%04x",
+                            translations[idx].language,
+                            translations[idx].codepage);
     if ( FAILED(hr) )
         throw Win32Exception();
 
