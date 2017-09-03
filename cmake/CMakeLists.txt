@@ -14,6 +14,8 @@ endif()
 
 cmake_policy(SET CMP0022 NEW)
 
+option(ENABLE_PCH "Enable PCH support" ON)
+
 find_package(Gettext REQUIRED)
 
 get_filename_component(ROOT_DIR ${CMAKE_SOURCE_DIR}/.. REALPATH)

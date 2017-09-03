@@ -194,9 +194,12 @@ add_library(${PROJECT_NAME} OBJECT ${SOURCES})
 set(wxWidgets_INCLUDE_DIRS ${INCLUDE_DIRS} PARENT_SCOPE)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
-include(PCHSupport)
-if(NOT PCHSupport_FOUND)
-  message(FATAL_ERROR "Precompiled headers are not supported")
-endif()
 
-ADD_PRECOMPILED_HEADER(${PROJECT_NAME} ${SOURCE_DIR}/wxWidgets/include/wx/wxprec.h)
+if(ENABLE_PCH)
+  include(PCHSupport)
+  if(NOT PCHSupport_FOUND)
+    message(FATAL_ERROR "Precompiled headers are not supported")
+  endif()
+
+  ADD_PRECOMPILED_HEADER(${PROJECT_NAME} ${SOURCE_DIR}/wxWidgets/include/wx/wxprec.h)
+endif()
